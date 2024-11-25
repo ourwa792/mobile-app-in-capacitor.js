@@ -1,0 +1,67 @@
+/* #bottom-bar {
+  width: 100%;
+  background-color: rgb(83, 255, 80);
+  position: fixed;
+  height: 45px; 
+ justify-content: space-around;
+ box-shadow: 0px -2px 5px rgba(0,0,0,0.2);
+ //position: sticky;
+ bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.bottom-bar-element {
+  font-size: 1rem;
+  width: 17%;
+  display: inline-block;
+/*   float: left;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 4px;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+ */
+ #bottom-bar {
+  width: 100%;
+  background-color: rgb(83, 255, 80);
+  position: fixed;
+  height: 45px; /* زيادة الارتفاع قليلاً لتناسب الأجهزة الصغيرة */
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around; /* توزيع العناصر بالتساوي */
+  align-items: center; /* توسيط المحتوى عموديًا */
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.bottom-bar-element {
+  font-size: 0.8rem; /* حجم خط أصغر لأجهزة الموبايل */
+  width: 20%; /* توزيع العناصر بالتساوي */
+  text-align: center;
+  padding: 5px 0; /* تباعد عمودي موحد */
+}
+
+.bottom-bar-element i {
+  display: block; /* يجعل الأيقونة فوق النص */
+  font-size: 1.4rem; /* حجم الأيقونة */
+  //margin-bottom: 1px; /* تباعد بين الأيقونة والنص */
+}
+
+.bottom-bar-element a {
+  text-decoration: none;
+  color: #000; /* لون النص */
+  margin-bottom: 1.2px
+}
+
+/* Media Query للأجهزة الأكبر */
+@media (min-width: 768px) {
+  #bottom-bar {
+    height: 70px; /* زيادة الارتفاع على الأجهزة الكبيرة */
+  }
+  
+  .bottom-bar-element {
+    font-size: 1rem; /* تكبير النص */
+  }
+}

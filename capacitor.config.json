@@ -1,0 +1,24 @@
+{
+  "appId": "com.example.app",
+  "appName": "ourwa",
+  "bundledWebRuntime": false,
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    },    
+    "CapacitorHttp": {
+      "enabled": true
+    },
+    "CapacitorCookies": {
+      "enabled": true
+    },
+    "CapacitorVideoPlayer": {
+      "androidPackage": "com.justinwflory.cvp"
+    }  
+    
+  },
+  "android": {
+    "webContentsDebuggingEnabled": true
+  }
+}
