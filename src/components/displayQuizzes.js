@@ -9,10 +9,10 @@ export const displayQuizzes = (quizzes) => {
         const quizItem = document.createElement('div');
         quizItem.className = 'quiz-item';
         quizItem.innerHTML = `
-            <h4>${quiz.title}</h4>
-            <p>الصعوبة: ${quiz.difficulty}</p>
-            <p>الدرجة: ${quiz.maxScore}</p>
-            <button id="startQuiz-${quiz.id}">ابدأ الكويز</button>
+            <h5>${quiz.title}</h5>
+            <p > <span style="color: orange"> الصعوبة: ${quiz.difficulty} </span> </p>
+            <p> <span style="color: red"> الدرجة: ${quiz.maxScore} </span></p>
+            <button class="btn btn-sm" id="startQuiz-${quiz.id}">ابدأ الاختبار</button>
         `;
         quizzesList.appendChild(quizItem);
 

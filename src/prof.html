@@ -38,9 +38,23 @@
     <!--  <script async type="text/javascript" charset="UTF-8"
      src="https://cdn.jsdelivr.net/npm/jsxgraph@1.10.0/distrib/jsxgraphcore.js">
    </script>  --> 
-     <script async type="text/javascript" charset="UTF-8"
-     src="./library/jsxgraphcore.js">
-   </script>  
+<style>
+
+
+.quizify-answer-list-item img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100px;
+    height: auto;
+}
+
+.quizify-answer-list-item p {
+    text-align: center;
+    margin: 10px 0 0;
+    font-size: 14px;
+}
+
+</style>   
 
   </head>
 
@@ -191,7 +205,102 @@
       
     <script type="module" src="./plugin/camera.js"></script> -->
 
+    <div id="quizContainer" class="container-sm"></div>
+    <style>
+      .cdc{
+     
+      }
+    </style>
+    <script type="module">
     
+    import quizify from 'quizify';
+
+
+
+var simpleQuiz = [
+    {
+        id: 1,
+        content: 'Which of the following animals is a herbivore?',
+        weight: 5,
+        answer_limit: null,
+        answers: [
+            {
+                id: 1,
+                content: 'Dog',
+                image: 'https://res.cloudinary.com/dg0d0jmtz/image/upload/v1732657849/quiz/%D8%B5%D8%AB%D8%AB_lfymjp.png',
+                is_correct: true
+            },
+            {
+                id: 2,
+                content: 'Cow',
+                image: 'https://via.placeholder.com/100',
+                is_correct: false
+            },
+            {
+                id: 3,
+                content: 'Lion',
+                image: 'https://via.placeholder.com/100',
+                is_correct: false
+            }
+        ]
+    }
+];
+
+document.addEventListener('DOMContentLoaded', function () {
+    var quizContainer = document.getElementById('quizContainer');
+
+    var quiz = new quizify(simpleQuiz, {
+        questionNextButtonClass: 'pure-button pure-button-primary'
+    });
+
+    quiz.addEventListener('answerSelected', handleQuizMoveToNext);
+
+    function handleQuizMoveToNext() {
+        var question = quiz.getNext();
+
+        // إزالة جميع العناصر السابقة
+        while (quizContainer.hasChildNodes()) {
+            quizContainer.removeChild(quizContainer.lastChild);
+        }
+
+        if (question.type === 'question') {
+            const questionNode = question.data.dom_node;
+
+            // العثور على قائمة الإجابات
+            const answerList = questionNode.querySelector('.quizify-answer-list');
+            if (answerList) {
+                // تحديث الإجابات لإضافة الصور
+                Array.from(answerList.children).forEach((answerItem, index) => {
+                    const answerData = question.data.answers[index];
+                    if (answerData) {
+                        // إنشاء صورة وإضافتها للعناصر
+                        const img = document.createElement('img');
+                        img.src = simpleQuiz[0].answers[index].image; // استخراج رابط الصورة
+                        img.alt = answerData.content;
+                        img.style.maxWidth = '100px';
+                        img.style.height = 'auto';
+
+                        // إضافة الصورة قبل النص
+                        answerItem.insertBefore(img, answerItem.firstChild);
+                    }
+                });
+            }
+
+            quizContainer.appendChild(questionNode);
+        } else if (question.type === 'result') {
+            quizContainer.appendChild(question.data.dom_node);
+        }
+    }
+
+    // استدعاء العرض الأول
+    handleQuizMoveToNext();
+});
+ 
+
+/////////////////////////////
+
+    </script>
+
 </body>
 
 </html>

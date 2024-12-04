@@ -5,12 +5,12 @@ import { displayQuizzes } from "./displayQuizzes";
 export const showQuizzes = async () => {
     const appContainer = document.getElementById('app');
     appContainer.innerHTML = `
-        <div>
-            <h3>اختر كويز لحله</h3>
-            <label>تصفية حسب الصعوبة:
+        <div class="container-sm align-content-center justify-content-center my-2 border border-1" lang='ar' dir='auto'>
+            <h5 class=" text-info text-sm-center my-1 ">اختر اختبار لحله</h5>
+            <label for='difficultyFilter'>تصفية حسب الصعوبة:
                 <select id="difficultyFilter">
                     <option value="all">الكل</option>
-                    <option value="easy">سهل</option>
+                    <option value="Easy">سهل</option>
                     <option value="Medium">متوسط</option>
                     <option value="Hard">صعب</option>
                 </select>

@@ -1,118 +1,49 @@
 import renderMathInElement from "katex/contrib/auto-render/auto-render.js";
-import "katex/dist/katex.css";
-import { board1 } from "./jxg";
+//import "katex/dist/katex.css";
+import { activities } from "./activities";
 
 export const learn = () => {
-  
-/* 
-  document.getElementById("app").innerHTML = `
-        <div class="d-flex justify-content-center"
-         id="jxgbox" style="width:200px;height: 300px; border: 1px solid black;"></div>
-        <p style="font-size: 1rem" id="info">$ \\frac{2}{2} - \\frac{2}{3} $</p>
-  `;
 
-  const info = document.getElementById("info");  
-  var board = JSXGraph.initBoard("jxgbox", {
-    boundingbox: [-5, 5, 5, -5],
-    axis: true,
-    keepAspectRatio: true,
-  });
-
-  board.create("circle", [
-    [0, 0],
-    [2, 2],
-  ]);
-
-  renderMathInElement(info, {
-    delimiters: [
-        {left: '$$', right: '$$', display: true},
-        {left: '$', right: '$', display: false},
-        {left: '\\(', right: '\\)', display: false},
-        {left: '\\[', right: '\\]', display: true}
-    ],
-  }) 
-  
-*/
-  
-  // تعريف الأنشطة
-  const activities = {
-    elementary: {
-      title: "المرحلة الابتدائية",
-      topics: [
-        {
-          id: 1,
-          title: "الكسور البسيطة",
-          description: "تعلم العمليات الأساسية على الكسور",
-          board: {
-            equation: "$$ \\frac{2}{2} - \\frac{2}{3} $$",
-          },
-          math: board1
-        },
-      ]
-    },
-    middle: {
-      title: "المرحلة الإعدادية",
-      topics: [
-        {
-          id: 1,
-          title: "المعادلات الجبرية",
-          description: "حل المعادلات من الدرجة الأولى",
-          board: {
-            equation: "2x + 3 = 7",
-          }
-        },
-
-      ]
-    }
-  };
-
-  // إنشاء واجهة المستخدم الرئيسية
   document.getElementById("app").innerHTML = `
   <style>
- .activities-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-  }
+    .activities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
 
-  .board-container {
-    padding: 5px;
-    background: #f8f9fa;
-    border-radius: 8px;
-  }
+      .board-container {
+        padding: 5px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
 
-  #jxgbox {
-    width: 200px;
-    height:190px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin: 0 auto;
-  }
+      #jxgbox {
+        width: 210px;
+        height:200px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin: 0 auto;
+      }
 
-  .description {
-    margin-top: 20px;
-    padding: 5px;
-    background: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
+      .description {
+        margin-top: 20px;
+        padding: 5px;
+        background: white;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
 
-  .btn-group {
-    width: 100%;
-    justify-content: center;
-  }
+    </style>
 
-</style>
-
-    <div class="">
-      <div class="stages-container">
+      <div class="" lang="ar" dir="auto">
         <!-- أزرار التبديل بين المراحل -->
-        <div class="btn-group mb-4" role="group">
-          <button class="btn btn-primary active" onclick="showStage('elementary')">
+        <div style="width:100%" class="btn-group-sm mb-4 justify-content-center" role="group">
+          <button class="btn btn-sm bg-info-subtle active mx-2" onclick="showStage('elementary')">
             المرحلة الابتدائية
           </button>
-          <button class="btn btn-primary" onclick="showStage('middle')">
+
+          <button class="btn btn-sm bg-info-subtle mx-2" onclick="showStage('middle')">
             المرحلة الإعدادية
           </button>
         </div>
@@ -125,7 +56,7 @@ export const learn = () => {
 
       <!-- مساحة عرض اللوح التفاعلي -->
       <div class="board-container" id="board-container" style="display: none">
-        <button class="btn btn-secondary mb-3" onclick="backToActivities()">
+        <button class="btn btn-sm btn-secondary mb-3" onclick="backToActivities()">
           رجوع
         </button>
           <div id="jxgbox" class="jxgbox col-sm-12"
@@ -135,29 +66,28 @@ export const learn = () => {
           <p id="info" class="mt-3"></p>
         <div class="description" id="activity-description"></div>
       </div>
-    </div>
   `;
 
   // دالة لعرض أنشطة مرحلة معينة
   function renderActivities(stage) {
     const stageData = activities[stage];
     return stageData.topics.map(topic => `
-      <div class="activity-card" onclick="showBoard('${stage}', ${topic.id})">
+      <div class="container-sm activity-card" onclick="showBoard('${stage}', ${topic.id})">
         <div class="card shadow border-3">
           <div class=" card-body">
             <h5 class="card-title">${topic.title}</h5>
-            <p class="card-text">${topic.description}</p>
-          </div>
+            </div>
         </div>
       </div>
     `).join('');
   }
-
+          
+  //<p class="card-text">${topic.description}</p>
   // إضافة الأساليب للنافذة العالمية
   window.showStage = (stage) => {
     document.getElementById('activities-container').innerHTML = renderActivities(stage);
     // تحديث حالة الأزرار
-    document.querySelectorAll('.btn-group .btn').forEach(btn => {
+    document.querySelectorAll('.btn-group-sm .btn-sm').forEach(btn => {
       btn.classList.remove('active');
     });
     event.target.classList.add('active');
@@ -186,7 +116,10 @@ export const learn = () => {
       ],
     });
 
-    board1()
+    if (topic.math) {
+      topic.math();
+    }
+
   };
 
   window.backToActivities = () => {

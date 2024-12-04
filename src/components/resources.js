@@ -54,23 +54,24 @@ export const Files = async () => {
 function displayFiles(files) {
   const fileList = document.getElementById("file-list")
     fileList.innerHTML = ""; // تفريغ المحتوى الحالي قبل العرض
-    fileList.classList.add("file-list")
+    fileList.classList.add('container-sm');
     files.forEach((file) => {
       const fileElement = document.createElement("div");
-      fileElement.classList.add("file");
+      fileElement.classList.add("card","card-body", 'my-2','border','border-1', 'shadow-md');
   
       // إنشاء عناصر النص
       const titleElement = document.createElement("strong");
       titleElement.textContent = file.title;
   
       const typeElement = document.createElement("span");
-      //typeElement.textContent = ` (${file.type})`;
+
       typeElement.textContent = '.pdf' ;
   
       // إنشاء زر التنزيل
       const downloadButton = document.createElement("button");
+      downloadButton.classList.add("btn",'btn-sm', 'bg-info-subtle')
 
-      downloadButton.textContent = "Download";
+      downloadButton.innerHTML += `<i class="bi bi-download mx-sm-auto"> تحميل  </i>`
       downloadButton.onclick = () => downloadFile(file.id, file.title, file.url, file.type);
   
       // إنشاء شريط التقدم والنص الخاص بالتقدم

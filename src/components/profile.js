@@ -2,42 +2,47 @@ import { CapacitorHttp } from "@capacitor/core";
 import { logout } from "../js/auth";
 import { profileInfo } from "../services/api";
 import { Filesystem, Directory } from "@capacitor/filesystem"; 
-import { CapacitorCookies } from "@capacitor/core";
-import { cookieUrl } from "../helper/url";
+
+//import { cookieUrl } from "../helper/url";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
-import { pickImageAndUpload } from "../helper/camera";
+//import { pickImageAndUpload } from "../helper/camera";
 
 export const profile = async () => {
   const info = `
-    <div class="h-75 col-sm-6 border-1 border-black card shadow-lg mb-3">
+    <div class="container-sm border border-2 mb-3">
       <img id="avatar" class="img-thumbnail text-center" alt="profile"
        src="/profileAvatar.png"> 
-      <div class="card-body">
-        <button id="uploadButton" class="btn btn-info btn-sm">التقاط أو اختيار صورة</button>
-      </div>
+        <button id="uploadButton" class="btn btn-info btn-sm my-2">
+          <i class="bi-camera">
+          التقاط أو اختيار صورة
+          </i>
+        </button>
     </div>
 
-    <div class="col-sm-8 border-1 border-black card shadow-lg">
-      <div class="table-responsive">
-        <table class="my-3 table table-striped">
-          <tr>
-            <th>اسم المستخدم</th>
-            <td id="userName"></td>
+    <div class="table-sm border border-2 rounded-2 my-2" dir='auto'>
+      <div class="table-responsive-sm">
+        <table class="my-3 table-sm">
+          <tr class='border-bottom'>
+            <td id="userName"><i class="bi bi-person"></i></td>
+            <td><i class="bi bi-person"></i></td>
           </tr>
-          <tr>
-            <th>الايميل</th>
+          <tr class='border-bottom'>
             <td id="email"></td>
+            <td> <i class="bi bi-envelope-at"></i> </td>
           </tr>
           <tr>
-            <th>تاريخ الإنشاء :</th>
             <td id="createdAt"></td>
+            <td> <i class="bi bi-calendar2-day"></i> </td>
           </tr>
           <tr>
-            <th>تسجيل الخروج</th>
             <td>
+
               <form id='logoutForm'>
-                <button type="submit" class="btn bg-danger btn-sm">Log out</button>
+                <button type="submit" class="btn bg-danger btn-sm my-sm-1">
+                  Log out <i class="bi bi-escape"></i>
+                </button>
               </form>
+
             </td>
           </tr>
         </table>

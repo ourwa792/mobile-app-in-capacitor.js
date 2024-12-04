@@ -12,7 +12,7 @@ import { Files } from '../components/resources';
 import { Lesson } from '../components/lesson';
 import { learn } from '../components/learn';
 import { showQuizzes } from '../components/quiz';
-//import { showZim } from '../components/zim';
+import { showZim } from '../components/zim';
 
 
 export const router = new Navigo("/", { hash: false, root: "/" }); 
@@ -47,6 +47,12 @@ async function handleRoute(callback) {
   const isSessionActive = await checkSession();
   toggleBottomBar(isSessionActive);
   if (isSessionActive) {
+    
+    const app = document.getElementById("app");
+    while (app.firstChild) {
+      app.removeChild(app.firstChild);  // إزالة جميع الأطفال
+    }
+
     await callback();  // تنفيذ الدالة الخاصة بالمسار
   } else {
     router.navigate('/login');
@@ -73,11 +79,23 @@ router
       router.navigate('/profile');
     }
   })
-  .on('/profile', () => handleRoute(profile))
-  .on('/resources', () => handleRoute(Files))
+  .on('/profile', () => { handleRoute(profile); /* document.body.style.backgroundColor = "#fff"; */  })
+  .on('/resources', () => { handleRoute(Files); /* document.body.style.backgroundColor = "#fff"; */  })
   .on('/lessons', () => handleRoute(Lesson))
-  .on('/learn', () => handleRoute(learn))
-  .on('/quiz', () => handleRoute(showQuizzes))
+  .on('/learn', () => {
+    //document.body.style.backgroundColor = "#fff"; 
+    learn();
+  })
+  .on('/quiz', () => {
+    handleRoute(showQuizzes)
+    //document.body.style.backgroundColor = "#fff"; 
+  })
+  .on('/zim', () => {
+    showZim();
+    //document.body.style.backgroundColor = "#fff"; 
+
+  }) 
+
   .resolve();
 
 
